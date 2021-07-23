@@ -1,5 +1,8 @@
 package com.example.codelabscomponentsroom
 
+//Room: представляет собой оболочку и реализует базу данных SQLite. Room выполняет за вас много работы, которую раньше приходилось делать самому.
+
+
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room

@@ -1,5 +1,9 @@
 package com.example.codelabscomponentsroom
 
+
+//MainActivity: отображает слова в списке, используя a RecyclerView и WordListAdapter.
+// В MainActivity, есть инструмент, Observer который наблюдает за словами из базы
+// данных и получает уведомление, когда они меняются.
 import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -30,8 +34,12 @@ class MainActivity : AppCompatActivity() {
         // Add an observer on the LiveData returned by getAlphabetizedWords.
         // The onChanged() method fires when the observed data changes and the activity is
         // in the foreground.
+        // Добавляем наблюдателя к LiveData, возвращаемому getAlphabetizedWords.
+        // Метод onChanged () срабатывает, когда наблюдаемые данные изменяются и активность
+        // на переднем плане.
         wordViewModel.allWords.observe(this) { words ->
             // Update the cached copy of the words in the adapter.
+            // Обновляем кешированную копию слов в адаптере.
             words.let { adapter.submitList(it) }
         }
 

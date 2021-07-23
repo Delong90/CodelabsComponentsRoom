@@ -1,5 +1,12 @@
 package com.example.codelabscomponentsroom
 
+//DAO: сопоставляет вызовы методов с запросами к базе данных, чтобы,
+// когда Репозиторий вызывает такой метод, как getAlphabetizedWords()Room,
+// может выполняться .SELECT * FROM word_table ORDER BY word ASC
+
+//DAO может предоставлять suspend запросы для одноразовых запросов и
+// Flow запросов - когда вы хотите получать уведомления об изменениях в базе данных.
+
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy

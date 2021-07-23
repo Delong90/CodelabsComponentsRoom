@@ -1,5 +1,8 @@
 package com.example.codelabscomponentsroom
 
+//WordViewModel: предоставляет методы для доступа к уровню данных и возвращает LiveData,
+// чтобы MainActivity мог установить отношения наблюдателя. *
+
 import androidx.lifecycle.*
 import kotlinx.coroutines.launch
 
@@ -15,6 +18,10 @@ class WordViewModel(private val repository: WordRepository) : ViewModel() {
     // пользовательский интерфейс при фактическом изменении данных.
     // - Репозиторий полностью отделен от UI через ViewModel.
 
+
+//    LiveData<List<Word>>: Делает возможным автоматическое обновление
+//    компонентов пользовательского интерфейса. Вы можете преобразовать из Flow,
+//    в LiveData, позвонив flow.toLiveData().
     val allWords: LiveData<List<Word>> = repository.allWords.asLiveData()
 
     /**
@@ -23,6 +30,8 @@ class WordViewModel(private val repository: WordRepository) : ViewModel() {
     /**
     * Запуск новой сопрограммы для вставки данных неблокирующим способом
     */
+
+
     fun insert(word: Word) = viewModelScope.launch {
         repository.insert(word)
     }
