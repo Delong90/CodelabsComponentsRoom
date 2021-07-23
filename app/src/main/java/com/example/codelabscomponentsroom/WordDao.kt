@@ -4,12 +4,14 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
+
 
 @Dao
 interface WordDao {
 
     @Query("SELECT * FROM word_table ORDER BY word ASC")
-    fun getAlphabetizedWords(): List<Word>
+    fun getAlphabetizedWords(): Flow<List<Word>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(word: Word)
@@ -18,9 +20,23 @@ interface WordDao {
     suspend fun deleteAll()
 }
 
+
+
+//Что такое DAO?
+//В DAO (объект доступа к данным) вы указываете запросы SQL и связываете их с вызовами методов.
+// Компилятор проверяет SQL и генерирует запросы из удобных аннотаций для общих запросов, таких
+// как @Insert. Room использует DAO для создания чистого API для вашего кода.
+//
+//DAO должен быть интерфейсом или абстрактным классом.
+//
+//По умолчанию все запросы должны выполняться в отдельном потоке.
+//
+//В комнате есть поддержка сопрограмм Kotlin . Это позволяет аннотировать ваши запросы suspend модификатором,
+//а затем вызывать их из сопрограммы или из другой функции приостановки.
+
 //Пройдемся по нему:
 //
-//WordDaoэто интерфейс; DAO должны быть интерфейсами или абстрактными классами.
+//WordDao это интерфейс; DAO должны быть интерфейсами или абстрактными классами.
 
 //@DaoАннотацию идентифицирует его как класс DAO для комнаты.
 
